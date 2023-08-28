@@ -1,7 +1,8 @@
 const db = require("../data/database");
+const bcrypt = require("bcrypt");
 
 class User {
-  constructor(email, password, fullname,codePostal, street, city) {
+  constructor(email, password, fullname, codePostal, street, city) {
     this.fullname = fullname;
     this.email = email;
     this.password = password;
@@ -9,23 +10,22 @@ class User {
       codePostal: codePostal,
       street: street,
       city: city,
-    }
-    
+    };
   }
 
   async signup() {
+    const password = await bcrypt.hash(this.password, 12);
 
-   const user = {
-  email: this.email,
-  password: this.password,
-  fullname: this.fullname,
-  address:{
-    codePostal: this.address.codePostal,
-    street: this.address.street,
-    city: this.address.city,
-  }
- 
-};
+    const user = {
+      email: this.email,
+      password: password,
+      fullname: this.fullname,
+      address: {
+        codePostal: this.address.codePostal,
+        street: this.address.street,
+        city: this.address.city,
+      },
+    };
     console.log(user);
     await db.getDB().collection("users").insertOne(user);
   }
@@ -33,6 +33,3 @@ class User {
 
 // Would you be a cynic or would be a builder
 module.exports = User;
-
-
-
