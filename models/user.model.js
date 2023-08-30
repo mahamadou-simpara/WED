@@ -27,7 +27,7 @@ class User {
         city: this.address.city,
       },
     };
-    console.log(user);
+    // console.log(user);
     await db.getDB().collection("users").insertOne(user);
   }
 
@@ -35,6 +35,13 @@ class User {
   existingUser() {
     return db.getDB().collection("users").findOne({email: this.email});
   }
+
+  async emailMatch(){
+   
+    const match =  await this.existingUser();
+    // console.log(match);
+    return match;
+  };
 
   async passwordCheck(existingUser) {
     // const existingUser = await db.getDB().collection("users").findOne({email: this.email})

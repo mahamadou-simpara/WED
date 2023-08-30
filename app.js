@@ -24,8 +24,8 @@ app.use(addCSRFToken);
 
 
 
-app.use(authRouter);
 app.use(checkAuthenticationStatus);
+app.use(authRouter);
 app.use(productRouter);
 
 

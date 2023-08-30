@@ -1,5 +1,5 @@
 function createSession(req, user, action) {
-    req.session.id = user._id.toString();
+    req.session._id = user._id.toString();
 
     req.session.save(action);
 };
@@ -7,7 +7,7 @@ function createSession(req, user, action) {
 function destroySession(req, action){
     // console.log(req.session.id);
     req.session._id = null
-    console.log(req.session);
+    // console.log(req.session, 'Test');
     req.session.save(action);
 
     // req.session.destroy((error) => {
