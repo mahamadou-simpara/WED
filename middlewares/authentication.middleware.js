@@ -10,6 +10,7 @@ function authenticationCheck(req, res, next){
 
     res.locals.uid = uid;
     res.locals.isAuth = true;
+    res.locals.isAdmin = req.session.isAdmin
     // console.log(res.locals.isAuth);
 
     next();

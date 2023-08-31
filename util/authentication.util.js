@@ -1,6 +1,6 @@
 function createSession(req, user, action) {
     req.session._id = user._id.toString();
-
+    req.session.isAdmin = user.isAdmin
     req.session.save(action);
 };
 
