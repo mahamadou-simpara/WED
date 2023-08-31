@@ -1,9 +1,31 @@
 const UserModel = require("../models/user.model");
 const handleSession = require("../util/authentication.util");
 const validation = require("../util/validation");
+const sessionFlash = require("../util/session-flash");
 
 function getSignUp(req, res) {
-  res.render("customer/auth/signup");
+  // if (!req.session.userData) {
+  //   flashUserdata(req, false, "", "", "", "", "", "", "");
+  // }
+
+  // const userData = req.session.userData;
+  // req.session.userData = null;
+
+  let userData = sessionFlash.getSessionData(req);
+
+  if(!userData){
+    userData = {
+      email: '',
+      confirmEmail: '',
+      password: '',
+      fullName: '',
+      postalCode: '',
+      street: '',
+      city: ''
+    }
+  };
+
+  res.render("customer/auth/signup", { userInput: userData });
 }
 
 async function signUp(req, res, next) {
@@ -18,6 +40,16 @@ async function signUp(req, res, next) {
     req.body.city
   );
 
+  const enteredData = {
+    email: req.body.email,
+    confirmEmail: req.body["confirm-email"],
+    password: req.body.password,
+    fullName: req.body.fullname,
+    postalCode: req.body["code-postal"],
+    street: req.body.street,
+    city: req.body.city,
+  };
+
   if (
     !validation.userDetailsValidation(
       req.body.email,
@@ -28,7 +60,15 @@ async function signUp(req, res, next) {
       req.body.city
     )
   ) {
-    res.redirect("/signup");
+    sessionFlash.flashUserdata(
+      req,
+      {
+        hasError: true,
+        ...enteredData,
+        message: "Please check your credential!"
+      },
+      res.redirect("/signup")
+    );
     return;
   }
 
@@ -38,18 +78,31 @@ async function signUp(req, res, next) {
       req.body["confirm-email"]
     )
   ) {
-    res.redirect("/signup");
-    console.log("Emails don't match");
+    sessionFlash.flashUserdata(
+      req,
+      {
+        hasError: true,
+        ...enteredData,
+        message: "Please check your credential!"
+      },
+      res.redirect("/signup")
+    );
     return;
   }
-  
-  
+
   try {
     const emailSimilarity = await user.emailMatch();
-    
+
     if (emailSimilarity) {
-      console.log("Email already exist!");
-      return res.redirect("/signup");
+      sessionFlash.flashUserdata(
+        req,
+        {
+          hasError: true,
+          ...enteredData,
+          message: "Email already exist!"
+        },
+        res.redirect("/signup")
+      );
     }
 
     await user.signup();
@@ -58,24 +111,55 @@ async function signUp(req, res, next) {
   }
 
   res.redirect("/login");
-}
+};
 
 function getLogin(req, res) {
-  res.render("customer/auth/login");
+  // if (!req.session.userData) {
+  //   flashUserdata(req, false, "", "", "", "", "", "", "");
+  // }
+
+  // const userData = req.session.userData;
+  // req.session.userData = null;
+
+  let userData = sessionFlash.getSessionData(req);
+
+  if(!userData){
+    userData = {
+      email: '',
+      password: ''
+    }
+  };
+
+  res.render("customer/auth/login", { userInput: userData });
 }
 
 async function login(req, res, next) {
   const user = new UserModel(req.body.email, req.body.password);
+
+  
   let existingUser;
   try {
     existingUser = await user.existingUser();
   } catch (error) {
     return next(error);
-  }
+  };
+ const enteredData = {
+  email: user.email,
+  password: user.password
+ }
+
+
 
   if (!existingUser) {
-    console.log("Please sign up first. You can use this email to do so!");
-    res.redirect("/login");
+    sessionFlash.flashUserdata(
+      req,
+      {
+        hasError: true,
+        ...enteredData,
+        message: "Please sign up first. You can use this email to do so!"
+      },
+      res.redirect("/login")
+    );
     return;
   }
   let passwordisValid;
@@ -87,8 +171,16 @@ async function login(req, res, next) {
   }
 
   if (!passwordisValid) {
+    sessionFlash.flashUserdata(
+      req,
+      {
+        hasError: true,
+        ...enteredData,
+        message: "Please check your password!"
+      },
+      res.redirect("/login")
+    );
     console.log("Please check your password!");
-    res.redirect("/login");
     return;
   }
 
