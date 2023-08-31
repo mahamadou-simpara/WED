@@ -1,41 +1,46 @@
-<%- include("../includes/head", {PageTitle: "Sign-up"})  %>
+<%- include("../../shared/includes/head", {PageTitle: "Sign-up"})  %>
 <link rel="stylesheet" href="auth/auth.css">
 <link rel="stylesheet" href="auth/form.css">
 
 </head>
 <body>
-    <%- include("../includes/header") %>
+    <%- include("../../shared/includes/header") %>
  <main>
     <h1>Create New Account</h1>
     <form action="/signup" method="POST">
+        <% if (userInput.hasError){ %>
+            <p><%= userInput.message %></p>
+        <% } %>
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+
         <p>
             <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" value="<%= userInput.email %>">
         </p>
         <p>
             <label for="confirm-email">Confirm Email</label>
-            <input type="email" id="confirm-email" name="confirm-email">
+            <input type="email" id="confirm-email" name="confirm-email" value="<%= userInput.confirmEmail %>">
         </p>
         <p>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" value="<%= userInput.password %>">
         </p>
         <hr>
         <p>
             <label for="fullname">Full-Name</label>
-            <input type="text" id="fullname" name="fullname">
+            <input type="text" id="fullname" name="fullname" value="<%= userInput.fullName %>">
         </p>
         <p>
             <label for="street">Street</label>
-            <input type="text" id="street" name="street">
+            <input type="text" id="street" name="street" value="<%= userInput.street %>">
         </p>
         <p>
             <label for="codePostal">Code Postal</label>
-            <input type="text" id="codePostal" name="code-postal">
+            <input type="text" id="codePostal" name="code-postal" value="<%= userInput.postalCode %>">
         </p>
         <p>
             <label for="city">City</label>
-            <input type="city" id="city" name="city">
+            <input type="city" id="city" name="city" value="<%= userInput.city %>">
         </p>
         <button class="btn">Create Account</button>
         <p id="switch-form"><a href="/login">Login Instead</a></p>
@@ -45,4 +50,4 @@
 
 
 
-<%- include("../includes/footer") %>
+<%- include("../../shared/includes/footer") %>
