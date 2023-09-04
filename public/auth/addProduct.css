@@ -1,0 +1,35 @@
+main form {
+  max-width: 45rem;
+  margin: var(--space-8) auto;
+  padding: var(--space-4);
+  /* background-color: var(--color-gray-600); */
+  background-color: transparent;
+  border-radius: var(--border-radius-medium);
+  text-align: center;
+}
+
+
+main form p {
+  text-align: left;
+}
+
+main form label{
+ display: block;
+ margin: var(--space-2);
+ color: var(--color-gray-100);
+}
+main form input {
+  font: inherit;
+  width: 100%;
+  border-radius: var(--border-radius-small);
+  padding: var(--space-2);
+  border: none;
+}
+
+main form textarea{
+    width: 100%;
+    font: inherit;
+    padding: var(--space-2);
+    border-radius: var(--border-radius-small);
+
+}
