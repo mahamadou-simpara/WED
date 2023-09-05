@@ -1,6 +1,5 @@
 <%- include("../../shared/includes/head", {PageTitle: "All-Products"})  %>
-
-
+<link rel="stylesheet" href="/style/products.css">
 </head>
 <body>
     <%- include("../../shared/includes/header") %>
@@ -12,8 +11,13 @@
    </section>
 
    <section>
-
-      <p>List of products' going on here ....</p>
+     <ul id="product-container">
+      <% for(const product of products){ %>
+         <li class="products-list">
+            <%- include('includes/product-item', {product: product}) %>
+         </li>
+         <% } %>
+     </ul>
    </section>
 
  </main>

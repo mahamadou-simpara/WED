@@ -89,3 +89,12 @@ a{
 .btn.alt-btn:hover{
     background-color: var(--color-primary-500-bg);
 }
+
+#logout{
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#logout:hover{
+    background-color: var(--color-primary-500-bg);
+} 

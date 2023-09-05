@@ -1,15 +1,29 @@
-function getProduct(req, res){
-    res.render('admin/products/all-products');
+const ProductModel = require('../models/product.model')
+
+async function getProduct(req, res, next){
+
+    try{
+        const products = await ProductModel.findAll();
+        console.log(products);
+        res.render('admin/products/all-products', {products: products});
+    }catch(error){
+        next(error);
+        return;
+    }
 };
 
 function createProduct(req, res){
     res.render('admin/products/new-product');
 };
 
-function addNewProduct(req, res){
+async function addNewProduct(req, res){
+    const product = new ProductModel({
+        ...req.body,
+        image: req.file.filename
+    });
+    
+    await product.save();
 
-    console.log(req.body);
-    console.log(req.file);
     res.redirect('/admin/products');
 };
 
