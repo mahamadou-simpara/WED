@@ -37,7 +37,8 @@ main form textarea{
 #img{
  width: 4rem;
  height: 4rem;
- display: inline;
+ border-radius: var(--border-radius-small);
+ display: none;
 }
 
 #image{
