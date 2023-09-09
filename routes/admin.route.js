@@ -10,4 +10,8 @@ router.get('/product/new', adminControllers.createProduct);
 
 router.post('/products', getUploadedImage, adminControllers.addNewProduct);
 
+router.get('/product/:id', adminControllers.getSingleProduct);
+
+router.post('/products/:id', getUploadedImage, adminControllers.updateProduct);
+
 module.exports = router;

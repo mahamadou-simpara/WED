@@ -13,7 +13,16 @@ async function getProduct(req, res, next){
 };
 
 function createProduct(req, res){
-    res.render('admin/products/new-product');
+
+    product = {
+        title: '',
+        summary: '',
+        price: 0,
+        description: '',
+      }
+    
+
+    res.render('admin/products/new-product', {product: product});
 };
 
 async function addNewProduct(req, res){
@@ -28,11 +37,42 @@ async function addNewProduct(req, res){
 };
 
 
+async function getSingleProduct(req, res) {
+
+    console.log(req.params.id);
+
+    const product = await ProductModel.findByID(req.params.id)
+
+    res.render('admin/products/update-product', {product: product})
+}
+
+async function updateProduct(req, res, next) {
+    
+    const product = new ProductModel({
+        ...req.body,
+        _id: req.params.id
+    });
+
+    if(req.file){
+        product.replaceImage(req.file.filename);
+    }
+
+    try {
+        product.save();
+    } catch (error) {
+        next(error);
+        return;
+    }
+    
+    res.redirect('/admin/products');
+}
 
 module.exports = {
     getProduct: getProduct,
     createProduct: createProduct,
-    addNewProduct: addNewProduct
+    addNewProduct: addNewProduct,
+    getSingleProduct: getSingleProduct,
+    updateProduct: updateProduct
 }
 
 

@@ -33,3 +33,18 @@ main form textarea{
     border-radius: var(--border-radius-small);
 
 }
+
+#img{
+ width: 4rem;
+ height: 4rem;
+ display: inline;
+}
+
+#image{
+ width: 40%;
+}
+
+#img-container{
+ display: flex;
+ gap: 1rem;
+}
