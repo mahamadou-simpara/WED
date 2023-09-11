@@ -4,7 +4,7 @@ async function getProduct(req, res, next){
 
     try{
         const products = await ProductModel.findAll();
-        console.log(products);
+        // console.log(products);
         res.render('admin/products/all-products', {products: products});
     }catch(error){
         next(error);
@@ -39,7 +39,7 @@ async function addNewProduct(req, res){
 
 async function getSingleProduct(req, res) {
 
-    console.log(req.params.id);
+    // console.log(req.params.id);
 
     const product = await ProductModel.findByID(req.params.id)
 
@@ -67,12 +67,27 @@ async function updateProduct(req, res, next) {
     res.redirect('/admin/products');
 }
 
+async function deleteProduct(req, res, next) {
+
+    try {
+
+        const product = await ProductModel.findByID(req.params.id);
+        await product.remove();
+        res.json({message: 'Deleted product!'})
+    } catch (error) {
+        return next(error);
+    }
+
+}
+
+
 module.exports = {
     getProduct: getProduct,
     createProduct: createProduct,
     addNewProduct: addNewProduct,
     getSingleProduct: getSingleProduct,
-    updateProduct: updateProduct
+    updateProduct: updateProduct,
+    deleteProduct: deleteProduct
 }
 
 

@@ -64,6 +64,11 @@ class Product {
     this.imagePath = `/products/assets/images/${this.image}`;
   };
 
+  async remove(){
+    const productId = new ObjectId(this.id);
+    await db.getDB().collection("products").deleteOne({_id: productId});
+  }
+
 
   replaceImage(newImage){
     this.image = newImage;

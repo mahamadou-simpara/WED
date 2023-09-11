@@ -11,5 +11,5 @@ function getAllProducts(req, res) {
 
 module.exports = {
     getProducts: getProducts,
-    getAllProducts: getAllProducts
+    getAllProducts: getAllProducts,
 };
