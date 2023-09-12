@@ -41,9 +41,15 @@ async function getSingleProduct(req, res) {
 
     // console.log(req.params.id);
 
-    const product = await ProductModel.findByID(req.params.id)
+    try {
+        const product = await ProductModel.findByID(req.params.id)
 
-    res.render('admin/products/update-product', {product: product})
+        res.render('admin/products/update-product', {product: product})
+    } catch (error) {
+        error.code = 404;
+        return;
+    }
+  
 }
 
 async function updateProduct(req, res, next) {
@@ -60,6 +66,7 @@ async function updateProduct(req, res, next) {
     try {
         product.save();
     } catch (error) {
+        error.code = 404;
         next(error);
         return;
     }
@@ -73,7 +80,7 @@ async function deleteProduct(req, res, next) {
 
         const product = await ProductModel.findByID(req.params.id);
         await product.remove();
-        res.json({message: 'Deleted product!'})
+        res.json({message: 'Deleted product!'});
     } catch (error) {
         return next(error);
     }
