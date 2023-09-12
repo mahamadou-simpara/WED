@@ -1,0 +1,13 @@
+<article class="products">
+  <img src="<%= product.imagePath %>" alt="" />
+  <div class="product-content">
+    <h2><%= product.title %></h2>
+    <div class="product-action">
+      <a href="/admin/product/<%= product.id %>" class="btn alt-btn">View & Edit</a>
+      <!-- <form action="/admin/product-delete/<%= product.id %>?_csrf=<%= locals.csrfToken %>" method="POST"> -->
+        <button id="delete-btn" class="btn alt-btn" data-productId= "<%= product.id %>" data-crsf= "<%= locals.csrfToken %>">Delete</button>
+      <!-- </form> -->
+    </div>
+  </div>
+  
+</article>

@@ -1,0 +1,16 @@
+<%- include("../../shared/includes/head", {PageTitle: "Add New Product"})  %>
+<link rel="stylesheet" href="/auth/addProduct.css">
+<script src="/scripts/prev-image.js" defer></script>
+</head>
+<body>
+    <%- include("../../shared/includes/header") %>
+ <main>
+    <h1>Add New Product</h1>
+
+    <%- include('includes/product-form', {submitUrl: '/admin/products', imageRequired: true}) %>
+
+ </main>
+
+
+
+<%- include("../../shared/includes/footer") %>
