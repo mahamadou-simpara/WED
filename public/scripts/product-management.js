@@ -23,4 +23,3 @@ async function deleteProduct(event) {
 for(const formSubmissionBtn of formSubmissionBtns){
     formSubmissionBtn.addEventListener('click', deleteProduct)
 }
-// console.log(formSubmissionBtns);

@@ -11,7 +11,7 @@ class Product {
     this.updateImageData();
     if (productData._id) {
       this.id = productData._id.toString();
-    }
+    };
   }
 
   static async findByID(productId) {
@@ -22,12 +22,17 @@ class Product {
         .collection("products")
         .findOne({ _id: id });
 
+        // if(!product){
+        //   error.code = 404;
+        // }
+
       return new Product(product);
     } catch (error) {
+
       // throw new Error("Could' not find the id");
       console.log(error);
-    }
-  }
+    };
+  };
 
   static async findAll() {
     const products = await db.getDB().collection("products").find().toArray();
@@ -67,7 +72,7 @@ class Product {
   async remove(){
     const productId = new ObjectId(this.id);
     await db.getDB().collection("products").deleteOne({_id: productId});
-  }
+  };
 
 
   replaceImage(newImage){
