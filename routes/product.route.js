@@ -7,8 +7,7 @@ router.get('/products', productController.getProducts);
 
 router.get('/', productController.getAllProducts);
 
-
-
+router.get('/product-detail/:id', productController.getProductDetail)
 
 
 module.exports = router;
