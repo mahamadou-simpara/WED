@@ -26,6 +26,8 @@ section {
 #product-detail-image{
  width: 100%;
 border-radius: var(--border-radius-small);
+object-fit: cover;
+border: 1px solid var(--color-gray-400);
 }
 
 #product-description{
@@ -41,15 +43,18 @@ border-radius: var(--border-radius-small);
         height: 25rem;
         flex-direction: row;
         justify-content: space-around;
-        align-items: center
+        align-items: center;
+        gap: 1rem;
+        overflow: hidden
     };
 
     #product-detail img{
-        width: 50%;
-        height: 60%;
+        width: 18rem;
+        height: 18rem;
         transform: rotate(325deg);
     }
     #product-detail div{
+        width: 16rem;
         height: 90%;
     }
  
@@ -58,8 +63,8 @@ border-radius: var(--border-radius-small);
     margin: var(--space-1) 0;
     }
     #product-detail-image{
-        width: 50%;
-        height: 60%;
+        width: 18rem;
+        height: 18rem;
         transform: rotate(347deg);
         /* transform: rotate(325deg); */
     };
