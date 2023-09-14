@@ -13,7 +13,7 @@ const checkAuthenticationStatus = require('./middlewares/authentication.middlewa
 const adminRouter = require('./routes/admin.route');
 const baseRouter = require('./routes/base.router')
 const protectRoute = require('./middlewares/protect-routes');
-
+const cartMiddleware = require('./util/cart');
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.set('views', path.join(__dirname, 'views')); // Set the custom views folder
 app.use(express.static('public'));
@@ -23,11 +23,10 @@ app.use(express.urlencoded({extended: false}));
 const createSession = createMongoDBSession();
 app.use(sessionStore(createSession));
 
-
+app.use(cartMiddleware);
 
 app.use(csrf());
 app.use(addCSRFToken);
-
 
 
 app.use(checkAuthenticationStatus);
