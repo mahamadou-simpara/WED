@@ -1,0 +1,11 @@
+<article class="cart-item">
+    <div class="item-info">
+        <h1><%= item.product.title %></h1>
+        <p>$ <%= item.totalPrice.toFixed(2)%> <span> ($ <%= item.product.price.toFixed(2) %>)</span></p>
+    </div>
+
+    <div class="item-action">
+        <input type="number" value="<%= item.Quantity %>">
+        <button class="btn alt-btn">Update</button>
+    </div>
+</article>
