@@ -8,5 +8,7 @@ router.post('/items', cartController.addCartItem);
 
 router.get('/', cartController.getCart);
 
+router.patch('/item', cartController.updateCartItem);
+
 
 module.exports = router;
