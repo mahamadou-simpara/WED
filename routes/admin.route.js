@@ -16,4 +16,7 @@ router.post('/products/:id', getUploadedImage, adminControllers.updateProduct);
 
 router.delete('/product-delete/:id', adminControllers.deleteProduct);
 
+router.get('/orders', adminControllers.getOrders);
+
+router.patch('/update/:id', adminControllers.updateOrderStatus)
 module.exports = router;

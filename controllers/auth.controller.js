@@ -195,10 +195,11 @@ function logout(req, res) {
   });
 }
 
+
 module.exports = {
   getSignUp: getSignUp,
   getLogin: getLogin,
   signUp: signUp,
   login: login,
-  logout: logout,
+  logout: logout
 };

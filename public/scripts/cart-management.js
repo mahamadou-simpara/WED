@@ -29,7 +29,11 @@ if(!response.ok){
   
 const responseData = await response.json();
 
-// console.log(responseData);
+console.log(responseData);
+
+// badgeElement.textContent = data.totalQuantity;
+// totalPriceElement.textContent = data.itemsTotalPrice.toFixed(2);
+// itemTotalPrices.textContent = data.itemsTotalPrice.toFixed(2);
 
 const newTotalItems = responseData.newTotalItems;
 

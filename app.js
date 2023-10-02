@@ -15,6 +15,7 @@ const baseRouter = require('./routes/base.router')
 const protectRoute = require('./middlewares/protect-routes');
 const cartMiddleware = require('./util/cart');
 const cartRoute = require('./routes/cart.route');
+const orderRouter = require('./routes/order.route');
 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.set('views', path.join(__dirname, 'views')); // Set the custom views folder
@@ -37,7 +38,10 @@ app.use(baseRouter);
 app.use(authRouter);
 app.use(productRouter);
 app.use('/cart',cartRoute);
-app.use(protectRoute);
+app.use(protectRoute.protectAuthRoute);
+app.use('/order', orderRouter);
+app.use(protectRoute.protectAdminRoute);
+
 app.use('/admin', adminRouter);
 
 

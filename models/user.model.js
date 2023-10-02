@@ -1,4 +1,5 @@
 const db = require("../data/database");
+const mongodb = require('mongodb')
 const bcrypt = require("bcrypt");
 
 
@@ -13,6 +14,13 @@ class User {
       city: city,
     };
   }
+
+
+  static getUserById(userId){
+    const id = new mongodb.ObjectId(userId)
+
+    return db.getDB().collection("users").findOne({_id: id}, { projection: { password: 0 }});
+  };
 
   async signup() {
     const password = await bcrypt.hash(this.password, 12);

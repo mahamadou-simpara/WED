@@ -9,6 +9,9 @@
   
     <section id="cart">
       <ul id="cart-items">
+        <% if(locals.cart.items.length === 0) { %>
+          <p id="no-items-instruction">No cart items found!</p>
+        <% } %>
         <% for(const cartItem of locals.cart.items) { %>
         <li>
             <%- include('includes/cart-item', { item: cartItem}) %>
@@ -18,7 +21,15 @@
       <div id="total-cart">
         <p>Total: $ <span><%= locals.cart.itemsTotalPrice.toFixed(2) %></span></p>
       
-        <button class="btn">Buy Product</button>
+        <%  if(locals.isAuth) { %>
+          <form action="/order" method="POST">
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            <button class="btn">Buy Product</buttn>
+          </form>
+
+        <% } else {%>
+          <p class="login-instruction">Please login to proceed and purchase</p>
+        <%  } %>
     </div>
     </section>
 

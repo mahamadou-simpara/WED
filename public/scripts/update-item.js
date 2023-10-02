@@ -2,8 +2,8 @@ const updateItemElementBtn = document.querySelectorAll('.item-action .btn');
 const badgeElement = document.querySelector('.items-list .badge');
 const totalPriceElement = document.querySelector('#total-cart p span')
 
-console.log(badgeElement);
-console.log(totalPriceElement);
+// console.log(badgeElement);
+// console.log(totalPriceElement);
 
 async function updateItemQuantity(event) {
    
@@ -35,11 +35,11 @@ async function updateItemQuantity(event) {
 
     const data = await responseData.json();
 
-    // console.log(data);
+    console.log(data);
 
     badgeElement.textContent = data.totalQuantity;
     totalPriceElement.textContent = data.itemsTotalPrice.toFixed(2);
-    itemTotalPrices.textContent = data.itemsTotalPrice.toFixed(2);
+    itemTotalPrices.textContent = data.updatedItemPrice.toFixed(2);
 
     if(newQuantity <= 0){
         btnParentElement.parentElement.parentElement.remove();
