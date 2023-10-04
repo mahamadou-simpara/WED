@@ -1,43 +1,46 @@
 const addItemToCartBtn = document.querySelector("#product-detail .btn");
-const badgeElement = document.querySelector('.items-list .badge');
+const badgeElements = document.querySelectorAll(".items-list .badge");
 
 // console.log(badgeElement);
 async function addItem() {
   const productId = addItemToCartBtn.dataset.productid;
   const csrf = addItemToCartBtn.dataset.csrf;
   let response;
-try {
+
+  try {
     response = await fetch("/cart/items", {
-        method: "POST",
-        body: JSON.stringify({
-          productId: productId,
-          _csrf: csrf,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-} catch (error) {
-    alert('Something went wrong!')
+      method: "POST",
+      body: JSON.stringify({
+        productId: productId,
+        _csrf: csrf,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    alert("Something went wrong!");
     return;
-};
+  }
 
-if(!response.ok){
-    alert('Something went wrong!')
+  if (!response.ok) {
+    alert("Something went wrong!");
     return;
-};
-  
-const responseData = await response.json();
+  }
 
-console.log(responseData);
+  const responseData = await response.json();
 
-// badgeElement.textContent = data.totalQuantity;
-// totalPriceElement.textContent = data.itemsTotalPrice.toFixed(2);
-// itemTotalPrices.textContent = data.itemsTotalPrice.toFixed(2);
+  console.log(responseData);
 
-const newTotalItems = responseData.newTotalItems;
+  // badgeElement.textContent = data.totalQuantity;
+  // totalPriceElement.textContent = data.itemsTotalPrice.toFixed(2);
+  // itemTotalPrices.textContent = data.itemsTotalPrice.toFixed(2);
 
-badgeElement.textContent = newTotalItems;
-};
+  const newTotalItems = responseData.newTotalItems;
+
+  for (const badgeElement of badgeElements) {
+    badgeElement.textContent = newTotalItems;
+  }
+}
 
 addItemToCartBtn.addEventListener("click", addItem);

@@ -17,7 +17,7 @@ async function updateItemQuantity(event) {
 
     // console.log(productId);
     // console.log(newQuantity);
-    // console.log(csrf)
+    console.log(csrf)
 
     const result = fetch('/cart/item', {
         method: 'PATCH',

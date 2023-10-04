@@ -114,11 +114,39 @@ async function getOrders(req, res, next){
     // }
 };
 
-function updateOrderStatus(req, res, next) {
+async function updateOrderStatus(req, res, next) {
     
-    console.log(req.params._id);
+    const orderId = req.params.id;
+    // console.log(orderId);
 
-    res.json('okay')
+    const newStatus = req.body.newStatus;
+    console.log(newStatus);
+
+    const result = OrderModel.updateOrder(orderId, newStatus);
+
+    const order = await OrderModel.findById(orderId);
+
+    const formattedOrder = OrderModel.transformDocument(order);
+
+
+    console.log(formattedOrder);
+
+    // delete formattedOrder.formattedDate;
+    // delete formattedOrder.status;
+    
+
+    // console.log(formattedOrder);
+
+    // const Order = new OrderModel(formattedOrder);
+        
+    // await Order.save();
+    const responseDate = await result
+
+    console.log(responseDate);
+
+    res.json({Response: {
+        message: 'status updated',
+    }})
 }
 
 module.exports = {

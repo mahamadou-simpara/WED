@@ -8,12 +8,15 @@
 
     <section>
       <ul id="orders-container">
-        <% if(orderedData.length === 0) { %>
+        <% if(orderedData.length === 0 || !orderedData) { %>
           <p id="no-items-instruction">No order items found!</p>
         <% } %>
+
+        <% if(orderedData || orderedData.length > 0) { %>
         <% for(const orderData of orderedData) { %>
           <%- include('../../shared/includes/order-list', {orderData: orderData}) %>
         <% } %>
+       <% } %>
       </ul>
     </section>
 

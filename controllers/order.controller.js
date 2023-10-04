@@ -10,6 +10,11 @@ async function addOrder(req, res, next) {
     return next(error);
   }
 
+  if(req.session.cart.itemsTotalPrice  <= 0){
+    console.log("No items found!");
+    return
+  }
+
   try {
     const order = new OrderModel(req.session.cart, user);
     await order.save();
@@ -27,10 +32,12 @@ async function getOrder(req, res, next) {
 
   // console.log(req.session._id);
 
+  let orderedData = []
   try {
-  const  orderedData = await OrderModel.findAllforUser(req.session._id);
+  orderedData = await OrderModel.findAllforUser(req.session._id);
 
-  console.log(orderedData);
+
+  // console.log(orderedData);
     res.render("customer/order/all-order", {orderedData: orderedData});
   } catch (error) {
     return next(error)

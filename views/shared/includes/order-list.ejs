@@ -16,14 +16,14 @@
         <% if(locals.isAdmin) { %>
         <div>
             <form>
-                <input type="hidden" name="order-id" value="<%= orderData.orderId %>">
-                <input type="hidden" name="_csrf" value=" <%= locals.csrfToken %>">
+                <input type="hidden" name="orderid" value="<%= orderData.orderId %>">
+                <input type="hidden" name="csrf" value="<%= locals.csrfToken %>">
                 <select name="status">
                     <option value="pedding">Pedding</option>
                     <option value="fulfilled">Fulfilled</option>
                     <option value="canceled">Canceled</option>
                 </select>
-                <button class="btn alt-btn">Update</button>
+                <button class="btn alt-btn" data-csrf="<%= locals.csrfToken %>">Update</button>
             </form>
         </div>
         <% } %>
