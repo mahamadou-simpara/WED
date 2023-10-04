@@ -103,3 +103,21 @@ a{
 /* #delete-btn{
  height: 100%;
 } */
+
+.badge{
+    margin-left: var(--space-2);
+    background-color: var(--color-primary-500);
+    padding: 0.15rem var(--space-4);
+    border-radius: 15rem;
+    color: var(--color-primary-500-contrast);
+}
+
+#no-items-instruction {
+ margin: 0;
+ text-align: center;
+ color: var(--color-primary-500);
+ margin: var(--space-1) 0;
+}
+.user-address{
+ margin: 0;
+}

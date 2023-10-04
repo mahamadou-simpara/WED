@@ -8,6 +8,9 @@
   
     <section>
       <ul id="product-container">
+         <% if(products.length === 0) { %>
+            <p id="no-items-instruction">No product found!</p>
+          <% } %>
        <% for(const product of products){ %>
           <li class="products-list">
              <%- include('../../shared/includes/product-item', {product: product}) %>

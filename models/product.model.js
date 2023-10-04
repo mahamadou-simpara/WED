@@ -29,8 +29,8 @@ class Product {
       return new Product(product);
     } catch (error) {
 
-      // throw new Error("Could' not find the id");
-      console.log(error);
+      throw new Error("Could' not find the id");
+      // console.log(error);
     };
   };
 

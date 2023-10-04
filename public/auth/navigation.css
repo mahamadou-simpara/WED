@@ -15,6 +15,7 @@ main {
   position: fixed;
   top: 0;
   background-color: var(--color-gray-500);
+  z-index: 1;
 }
 
 #header-menu nav {

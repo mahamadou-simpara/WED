@@ -1,0 +1,37 @@
+<li class="orders">
+
+     <div>
+        <div class="total-price">$<span><%= orderData.productData.itemsTotalPrice.toFixed(2) %></span></div> - <span><%= orderData.formattedDate %></span>
+        <% if(locals.isAdmin) { %>
+        <a href="mailto:<%= orderData.userData.email %>"><p><%= orderData.userData.fullname %></p></a>
+        <div><address><%= orderData.userData.address.street %> (<%= orderData.userData.address.codePostal %> <span><%= orderData.userData.address.city %></span>)</address></div>
+        <% } %>
+        <ol>
+            <% for(const item of orderData.productData.items) {%>
+            <li>
+                <%= item.product.title %> - $<span><%= item.totalPrice.toFixed(2) %> ($<span><%= item.product.price.toFixed(2) %></span> * <span><%= item.Quantity %></span>)</span>
+            </li>
+            <% } %>
+        </ol>
+        <% if(locals.isAdmin) { %>
+        <div>
+            <form>
+                <input type="hidden" name="orderid" value="<%= orderData.orderId %>">
+                <input type="hidden" name="csrf" value="<%= locals.csrfToken %>">
+                <select name="status">
+                    <option value="pedding">Pedding</option>
+                    <option value="fulfilled">Fulfilled</option>
+                    <option value="canceled">Canceled</option>
+                </select>
+                <button class="btn alt-btn" data-csrf="<%= locals.csrfToken %>">Update</button>
+            </form>
+        </div>
+        <% } %>
+    </div>
+
+
+    <div class="product-state">
+        <p><%= orderData.status %></p>
+    </div>
+
+</li>

@@ -2,6 +2,7 @@ const ProductModel = require('../models/product.model')
 
 async function getProducts(req, res) {
 
+
     const products = await ProductModel.findAll();
 
     res.render('customer/product/products', {products: products });

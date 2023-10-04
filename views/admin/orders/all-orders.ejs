@@ -1,0 +1,30 @@
+<%- include("../../shared/includes/head", {PageTitle: "All-Products"})  %>
+<link rel="stylesheet" href="/style/products.css">
+<link rel="stylesheet" href="/style/order.css">
+<script src="/scripts/product-management.js" defer></script>
+<script src="/scripts/orders-management.js" defer></script>
+</head>
+<body>
+    <%- include("../../shared/includes/header") %>
+ <main>
+   <section>
+      <h1>Order Administration</h1>
+      <h2>Manage Order</h2>
+   </section>
+
+   <section>
+     <% if(orderedData.length === 0) { %>
+       <p id="no-items-instruction">No order items found!</p>
+     <% } %>
+    <ul id="orders-container">
+        <% for(const orderData of orderedData) { %>
+        <%- include('../../shared/includes/order-list', {orderData: orderData}) %>
+        <% } %>
+     </ul>
+   </section>
+
+ </main>
+
+
+
+<%- include("../../shared/includes/footer") %>
